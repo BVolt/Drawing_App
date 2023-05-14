@@ -1,7 +1,6 @@
 import tkinter as tk
 from menu_actions import setup_menu, confirm_close
 from turtle_canvas import TurtleCanvas
-from PIL import Image, ImageTk
 
 
 def main():

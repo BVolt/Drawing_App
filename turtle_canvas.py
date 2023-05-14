@@ -65,10 +65,18 @@ class TurtleCanvas(tk.Frame):
         else:
             prev_x, prev_y = x, -y
 
-        self.drawing_data.append({"x": x, "y": -y, "prev_x": prev_x, "prev_y": prev_y, "color": self.t.pencolor(), "size": self.t.pensize(), "pendown": self.t.isdown(), "eraser": self.eraser_on})
+        self.drawing_data.append({
+            "x": x, 
+            "y": -y, 
+            "prev_x": prev_x, 
+            "prev_y": prev_y, 
+            "color": self.t.pencolor(), 
+            "size": self.t.pensize(), 
+            "pendown": self.t.isdown(), 
+            "eraser": self.eraser_on
+        })
+
         self.canvas.bind("<B1-Motion>", self.draw_line)
-
-
 
     def set_pen_size(self):
         size = simpledialog.askinteger("Pen Size", "Enter pen size:", minvalue=1, maxvalue=100)
@@ -85,7 +93,7 @@ class TurtleCanvas(tk.Frame):
     def redraw(self, save=False):
         if not save:
             self.t.clear()
-        self.turtle_screen.tracer(0)  # Turn off screen updates
+        self.turtle_screen.tracer(0) 
         for data in self.drawing_data:
             self.t.penup()
             self.t.goto(data["prev_x"], data["prev_y"])
@@ -96,9 +104,7 @@ class TurtleCanvas(tk.Frame):
             self.t.pencolor(data["color"])
             self.t.pensize(data["size"])
             self.t.goto(data["x"], data["y"])
-        self.turtle_screen.tracer(1)  # Turn screen updates back on
-
-
+        self.turtle_screen.tracer(1)
 
     def set_bg_color(self):
         color = colorchooser.askcolor()[1]
@@ -116,9 +122,6 @@ class TurtleCanvas(tk.Frame):
             if self.eraser_on:
                 self.t.pencolor(color)
 
-    def clear(self):
-        self.t.clear()
-
     def toggle_eraser(self):
         self.eraser_on = not self.eraser_on
 
@@ -128,3 +131,6 @@ class TurtleCanvas(tk.Frame):
         else:
             self.t.pencolor(self.previous_pen_color)
             self.t.pensize(self.previous_pen_size)
+
+    def clear(self):
+        self.t.clear()
