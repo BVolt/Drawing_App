@@ -2,4 +2,4 @@
 
 ## Instruction for running the program
 
-First download the repository. Then you can either run the main.py file or use the executable file.
+First download the repository. Then with python installed run python main.py.
